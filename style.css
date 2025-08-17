@@ -1,0 +1,15 @@
+.hero-section {
+    background: url('hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+}
+
+.feature-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}

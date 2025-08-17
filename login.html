@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .login-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .login-card h2 {
+            margin-bottom: 30px;
+            color: #ff7e5f;
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 50px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        .btn-login {
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-weight: bold;
+            background: #ff7e5f;
+            border: none;
+        }
+        .btn-login:hover {
+            background: #feb47b;
+        }
+        .login-footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .login-footer a {
+            color: #ff7e5f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>FitZone Login</h2>
+        <form id="loginForm">
+            <input type="email" id="email" class="form-control" placeholder="Email" required>
+            <input type="password" id="password" class="form-control" placeholder="Password" required>
+            <button type="submit" class="btn btn-login w-100">Login</button>
+        </form>
+        <div class="login-footer">
+            <p>Don't have an account? <a href="register.html">Register Now</a></p>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                    alert('Login successful! Welcome ' + data.user.name);
+                    window.location.href = 'index.html'; // redirect after login
+                } else {
+                    alert(data.msg);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert('Something went wrong');
+            }
+        });
+    </script>
+
+</body>
+</html>

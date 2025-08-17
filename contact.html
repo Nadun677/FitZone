@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone - Contact Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+        }
+        .contact-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .contact-card h2 {
+            margin-bottom: 30px;
+            color: #ff5e62;
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 50px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        .btn-contact {
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-weight: bold;
+            background: #ff5e62;
+            border: none;
+            color: #fff;
+        }
+        .btn-contact:hover {
+            background: #ff9966;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-card">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <input type="text" id="name" class="form-control" placeholder="Full Name" required>
+            <input type="email" id="email" class="form-control" placeholder="Email" required>
+            <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+            <textarea id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+            <button type="submit" class="btn-contact w-100">Send Message</button>
+        </form>
+    </div>
+
+    <script>
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const res = await fetch('http://localhost:5000/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, subject, message })
+                });
+
+                const data = await res.json();
+                alert(data.msg);
+
+                if (res.status === 201) {
+                    contactForm.reset(); // clear form
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert('Something went wrong');
+            }
+        });
+    </script>
+
+</body>
+</html>
+
