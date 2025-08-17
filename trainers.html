@@ -1,103 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitZone - Trainers</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9966, #ff5e62);
-      padding-top: 60px;
-      min-height: 100vh;
-    }
-    h2 {
-      color: #fff;
-      text-align: center;
-      margin-bottom: 50px;
-      font-weight: bold;
-    }
-    .trainer-card {
-      background: #fff;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .trainer-card:hover {
-      transform: translateY(-5px);
-    }
-    .trainer-card img {
-      border-radius: 50%;
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-    .trainer-card h4 {
-      color: #ff5e62;
-      margin-bottom: 10px;
-    }
-    .trainer-card p {
-      color: #555;
-    }
-    .trainer-card .btn-contact {
-      border-radius: 50px;
-      background: #ff9966;
-      color: #fff;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .trainer-card .btn-contact:hover {
-      background: #ff5e62;
-      color: #fff;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitZone - Trainers</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #36d1dc, #5b86e5);
+    padding-top: 60px;
+    min-height: 100vh;
+}
+h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+.trainer-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    transition: transform 0.3s;
+}
+.trainer-card:hover {
+    transform: translateY(-5px);
+}
+.trainer-card h4 {
+    color: #5b86e5;
+    margin-bottom: 10px;
+}
+.trainer-card p {
+    color: #555;
+}
+.social-icons a {
+    color: #5b86e5;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+.social-icons a:hover {
+    color: #36d1dc;
+}
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Our Expert Trainers</h2>
-    <div class="row" id="trainersContainer">
-     
-    </div>
-  </div>
-
-  <script>
-    async function loadTrainers() {
-      try {
-        const res = await fetch('http://localhost:5000/api/trainers');
-        const data = await res.json();
-
-        const container = document.getElementById('trainersContainer');
-        container.innerHTML = '';
-
-        data.trainers.forEach(trainer => {
-          const col = document.createElement('div');
-          col.className = 'col-md-4';
-          col.innerHTML = `
+<div class="container">
+    <h2>Meet Our Trainers</h2>
+    <div class="row">
+        <!-- Trainer 1 -->
+        <div class="col-md-4">
             <div class="trainer-card">
-              <img src="${trainer.image}" alt="${trainer.name}">
-              <h4>${trainer.name}</h4>
-              <p>${trainer.specialty}</p>
-              <a href="contact.html" class="btn btn-contact mt-3">Contact Trainer</a>
+                <h4>John Doe</h4>
+                <p>Yoga & Meditation Expert with 10 years of experience helping clients improve flexibility and reduce stress.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
-          `;
-          container.appendChild(col);
-        });
+        </div>
 
-      } catch (err) {
-        console.error(err);
-        alert('Failed to load trainers');
-      }
-    }
+        <!-- Trainer 2 -->
+        <div class="col-md-4">
+            <div class="trainer-card">
+                <h4>Jane Smith</h4>
+                <p>Strength Training Coach specializing in building muscle and toning the body through personalized programs.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
 
-    loadTrainers();
-  </script>
+        <!-- Trainer 3 -->
+        <div class="col-md-4">
+            <div class="trainer-card">
+                <h4>Mike Lee</h4>
+                <p>Zumba & Cardio specialist making workouts fun and energetic while improving stamina and fitness.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trainer 4 -->
+        <div class="col-md-4">
+            <div class="trainer-card">
+                <h4>Lisa Wong</h4>
+                <p>Pilates & Functional Training Coach helping clients improve posture, core strength, and overall fitness.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trainer 5 -->
+        <div class="col-md-4">
+            <div class="trainer-card">
+                <h4>Chris Brown</h4>
+                <p>HIIT & CrossFit Expert pushing clients to reach maximum endurance and strength with high-intensity sessions.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trainer 6 -->
+        <div class="col-md-4">
+            <div class="trainer-card">
+                <h4>Emma Davis</h4>
+                <p>Cardio Blast & Aerobics instructor helping clients burn calories quickly with fun and effective workouts.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

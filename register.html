@@ -1,117 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitZone - Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .register-card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        .register-card h2 {
-            margin-bottom: 30px;
-            color: #6a11cb;
-            font-weight: bold;
-        }
-        .form-control {
-            border-radius: 50px;
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-        .btn-register {
-            border-radius: 50px;
-            padding: 10px 30px;
-            font-weight: bold;
-            background: #6a11cb;
-            border: none;
-            color: #fff;
-        }
-        .btn-register:hover {
-            background: #2575fc;
-        }
-        .register-footer {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        .register-footer a {
-            color: #6a11cb;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .register-footer a:hover {
-            text-decoration: underline;
-
-        }
-
-        
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitZone - Register</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    body {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .register-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+    .register-card h2 {
+        margin-bottom: 30px;
+        color: #ff7e5f;
+        font-weight: bold;
+    }
+    .form-control {
+        border-radius: 50px;
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+    .btn-register {
+        border-radius: 50px;
+        padding: 10px 30px;
+        font-weight: bold;
+        background: #ff7e5f;
+        border: none;
+    }
+    .btn-register:hover {
+        background: #feb47b;
+    }
+    .register-footer {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    .register-footer a {
+        color: #ff7e5f;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .register-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
 <body>
 
-    <div class="register-card">
-        <h2>FitZone Registration</h2>
-        <form id="registerForm">
-            <input type="text" id="name" class="form-control" placeholder="Full Name" required>
-            <input type="email" id="email" class="form-control" placeholder="Email" required>
-            <input type="password" id="password" class="form-control" placeholder="Password" required>
-            <button type="submit" class="btn-register w-100">Register</button>
-        </form>
-        <div class="register-footer">
-            <p>Already have an account? <a href="login.html">Login Here</a></p>
-        </div>
+<div class="register-card">
+    <h2>FitZone Register</h2>
+    <form id="registrationForm">
+        <input type="text" id="fullName" class="form-control" placeholder="Full Name" required>
+        <input type="email" id="email" class="form-control" placeholder="Email" required>
+        <input type="tel" id="phone" class="form-control" placeholder="Phone" required>
+        <input type="password" id="password" class="form-control" placeholder="Password" required>
+        <button type="submit" class="btn btn-register w-100">Register</button>
+    </form>
+    <div class="register-footer">
+        <p>Already have an account? <a href="login.html">Login Here</a></p>
     </div>
+</div>
 
-    <script>
-        const registerForm = document.getElementById('registerForm');
+<script>
+const form = document.getElementById('registrationForm');
 
-        registerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const password = document.getElementById('password').value;
 
-            try {
-                const res = await fetch('http://localhost:5000/api/auth/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, password })
-                });
+    const newUser = { fullName, email, phone, password };
 
-                const data = await res.json();
-                alert(data.msg);
+    let users = JSON.parse(localStorage.getItem('registeredUsers') || "[]");
 
-                if (res.status === 201) {
-                    window.location.href = 'login.html'; // redirect to login after successful registration
-                }
+    // Check if email already exists
+    const exists = users.find(u => u.email === email);
+    if(exists){
+        alert("Email already registered!");
+        return;
+    }
 
-            } catch (err) {
-                console.error(err);
-                alert('Something went wrong');
-            }
-        });
-        const urlParams = new URLSearchParams(window.location.search);
-const selectedClass = urlParams.get('class');
-document.getElementById('className').innerText = selectedClass; // if you have an element to show it
+    users.push(newUser);
+    localStorage.setItem('registeredUsers', JSON.stringify(users));
 
-    </script>
+    alert('Registration successful! You can now login.');
+    form.reset();
+    window.location.href = 'login.html';
+});
+</script>
 
 </body>
 </html>
