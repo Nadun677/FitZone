@@ -10,8 +10,8 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #43cea2, #185a9d);
-      min-height: 100vh;
       padding-top: 60px;
+      min-height: 100vh;
     }
     .blog-card {
       background: #fff;
@@ -19,26 +19,22 @@
       padding: 20px;
       margin-bottom: 30px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+      cursor: pointer;
     }
+    .blog-card:hover { transform: translateY(-5px); }
     .blog-card img {
       border-radius: 15px;
       height: 200px;
       object-fit: cover;
+      width: 100%;
     }
-    .blog-card h4 {
-      color: #185a9d;
-      margin-top: 15px;
-    }
-    .blog-card p {
-      color: #333;
-    }
-    .blog-card a {
-      color: #43cea2;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .blog-card a:hover {
-      text-decoration: underline;
+    .blog-card h4 { color: #185a9d; margin-top: 15px; }
+    .blog-card p { color: #333; }
+    .blog-card .meta {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 10px;
     }
     .container h2 {
       color: #fff;
@@ -46,49 +42,101 @@
       margin-bottom: 40px;
       font-weight: bold;
     }
+    .full-content {
+      display: none;
+      margin-top: 10px;
+      line-height: 1.7;
+      color: #333;
+    }
+    .show-more {
+      color: #43cea2;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .show-more:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>FitZone Blog</h2>
-    <div class="row" id="blogContainer">
-      <!-- Blog posts will appear here -->
+<div class="container">
+  <h2>FitZone Blog</h2>
+  <div class="row" id="blogContainer"></div>
+</div>
+
+<script>
+const blogs = [
+  {
+    title: "5 Tips for a Healthier Lifestyle",
+    content: "Five key tips for a healthier lifestyle include prioritizing a balanced diet, engaging in regular physical activity, ensuring sufficient sleep, managing stress, and considering supplementation if needed. These elements work together to support overall well-being and help prevent various health issues.",
+   
+    author: "John Doe",
+    category: "Health",
+    date: "2025-08-17"
+  },
+  {
+    title: "Beginner’s Guide to Weight Training",
+    content: "A beginner's guide to weight training emphasizes starting with lighter weights, focusing on proper form, and gradually increasing the weight or resistance as strength improves. Warm-up before each session and cool down afterwards to reduce injury risk and improve muscle recovery. Rest between sets and workouts is crucial for muscle repair and growth.",
+    //image: "image/reference-image-353670202.webp",
+    author: "Jane Smith",
+    category: "Fitness",
+    date: "2025-08-15"
+  },
+  {
+    title: "Top 10 Healthy Foods You Must Try",
+    content: "Here are 10 healthy foods to incorporate into your diet: salmon, leafy greens (like spinach), sweet potatoes, blueberries, almonds, broccoli, oatmeal, avocados, dark chocolate, and lentils. These foods offer a wide range of nutrients and can contribute to overall well-being.",
+    //image: "image/reference-image-353670203.webp",
+    author: "Admin",
+    category: "Nutrition",
+    date: "2025-08-10"
+  },
+  {
+    title: "Yoga for Stress Relief",
+    content: "Yoga can be an effective tool for stress relief by combining physical postures, breathing techniques, and meditation. It can help reduce stress hormones like cortisol, lower blood pressure, and improve mood by increasing the production of endorphins. Yoga also helps regulate the nervous system, promoting relaxation and a sense of calm.",
+    //image: "image/reference-image-353670204.webp",
+    author: "Lisa Wong",
+    category: "Wellness",
+    date: "2025-08-12"
+  }
+];
+
+const container = document.getElementById('blogContainer');
+
+blogs.forEach((post, index) => {
+  const col = document.createElement('div');
+  col.className = 'col-md-6';
+  col.innerHTML = `
+    <div class="blog-card">
+      
+      <div class="meta">
+        <span><i class="fas fa-user me-1"></i>${post.author}</span> |
+        <span><i class="fas fa-calendar-alt me-1"></i>${new Date(post.date).toLocaleDateString()}</span> |
+        <span><i class="fas fa-tag me-1"></i>${post.category}</span>
+      </div>
+      <h4>${post.title}</h4>
+      
+      <span class="show-more" onclick="toggleContent(${index})">Read More</span>
+      <p class="full-content" id="fullContent${index}">${post.content}</p>
     </div>
-  </div>
+  `;
+  container.appendChild(col);
+});
 
-  <script>
-    // Fetch blog posts from backend
-    async function loadBlogPosts() {
-      try {
-        const res = await fetch('http://localhost:5000/api/blog');
-        const data = await res.json();
+function toggleContent(index){
+  const fullContent = document.getElementById(`fullContent${index}`);
+  const button = document.querySelectorAll(".show-more")[index];
+  
+  if(fullContent.style.display === "none" || fullContent.style.display === ""){
+    fullContent.style.display = "block";
+    button.textContent = "Show Less";
+  } else {
+    fullContent.style.display = "none";
+    button.textContent = "Read More";
+  }
+}
+</script>
 
-        const container = document.getElementById('blogContainer');
-        container.innerHTML = '';
-
-        data.posts.forEach(post => {
-          const col = document.createElement('div');
-          col.className = 'col-md-4';
-          col.innerHTML = `
-            <div class="blog-card">
-              <img src="${post.image}" alt="${post.title}">
-              <h4>${post.title}</h4>
-              <p>${post.content.substring(0, 100)}...</p>
-              <a href="blog-details.html?id=${post._id}">Read More</a>
-            </div>
-          `;
-          container.appendChild(col);
-        });
-
-      } catch (err) {
-        console.error(err);
-        alert('Failed to load blog posts');
-      }
-    }
-
-    loadBlogPosts();
-  </script>
 </body>
 </html>
-

@@ -38,3 +38,24 @@ app.use('/api/blog', blogRoutes);
 const classRoutes = require('./routes/classes');
 app.use('/api/classes', classRoutes);
 
+const trainerRoutes = require('./routes/trainers');
+app.use('/api/trainers', trainerRoutes);
+
+
+
+
+
+// Membership routes
+const membershipRoutes = require('./routes/memberships');
+app.use('/api/memberships', membershipRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
+
+
+const blogRouter = require('./routes/blog'); // assuming you saved it as routes/blog.js
+app.use('/api/blog', blogRouter);
+
+

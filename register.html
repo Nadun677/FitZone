@@ -57,7 +57,10 @@
         }
         .register-footer a:hover {
             text-decoration: underline;
+
         }
+
+        
     </style>
 </head>
 <body>
@@ -104,6 +107,10 @@
                 alert('Something went wrong');
             }
         });
+        const urlParams = new URLSearchParams(window.location.search);
+const selectedClass = urlParams.get('class');
+document.getElementById('className').innerText = selectedClass; // if you have an element to show it
+
     </script>
 
 </body>

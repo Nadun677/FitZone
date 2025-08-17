@@ -34,15 +34,21 @@
     .class-card img {
       border-radius: 15px;
       height: 180px;
+      width: 100%;
       object-fit: cover;
       margin-bottom: 15px;
     }
-    .class-card h4 {
+    .class-card h4, .card-title {
       color: #5b86e5;
       margin-bottom: 10px;
     }
-    .class-card p {
+    .class-card p, .card-text {
       color: #555;
+    }
+    .schedule {
+      text-align: left;
+      margin-top: 10px;
+      font-size: 0.9rem;
     }
     .btn-view {
       border-radius: 50px;
@@ -50,6 +56,7 @@
       color: #fff;
       font-weight: bold;
       transition: background 0.3s;
+      margin-top: 10px;
     }
     .btn-view:hover {
       background: #5b86e5;
@@ -61,44 +68,146 @@
 
   <div class="container">
     <h2>All Fitness Classes</h2>
-    <div class="row" id="classesContainer">
-      <!-- Classes will be loaded here dynamically -->
+    <div class="row">
+      
+      <!-- Class 1 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/photo-1554284126-aa88f22d8b74.jpg" alt="Yoga">
+          <h4>Yoga</h4>
+          <p>Improve flexibility, reduce stress, and find inner balance with our relaxing yoga sessions.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Mon, Wed, Fri: 7:00 AM - 8:00 AM</li>
+              <li>Tue, Thu: 6:00 PM - 7:00 PM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 2 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/WhatsApp Image 2025-08-17 at 18.47.13_918a3955.jpg" alt="Strength Training">
+          <h4>Strength Training</h4>
+          <p>Build muscle, increase strength, and achieve a toned body with guided workouts.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Mon, Wed, Fri: 6:00 PM - 7:00 PM</li>
+              <li>Sat: 9:00 AM - 10:00 AM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 3 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/photo-1571019614242-c5c5dee9f50b.jpg" alt="Zumba">
+          <h4>Zumba</h4>
+          <p>Dance your way to fitness with high-energy Zumba routines and fun music beats.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Tue, Thu: 5:30 PM - 6:30 PM</li>
+              <li>Sat: 11:00 AM - 12:00 PM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 4 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/Cardio-Blast-Active_Life_2018_0206.jpg" alt="Cardio Blast">
+          <h4>Cardio Blast</h4>
+          <p>Burn calories fast with intense cardio workouts designed to boost endurance.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Mon, Wed: 7:30 AM - 8:30 AM</li>
+              <li>Fri: 6:00 PM - 7:00 PM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 5 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/crossfit-athlete-doing-exercise-with-a-barbell-2022-02-02-03-57-07-utc-1-scaled.jpg" alt="CrossFit">
+          <h4>CrossFit</h4>
+          <p>Challenge yourself with strength, endurance, and functional exercises in CrossFit style.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Tue, Thu: 6:30 PM - 7:30 PM</li>
+              <li>Sat: 10:00 AM - 11:00 AM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 6 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/photo-1605296867304-46d5465a13f1.jpg" alt="Pilates">
+          <h4>Pilates</h4>
+          <p>Focus on posture, flexibility, and strengthening your core with pilates classes.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Mon, Wed: 8:00 AM - 9:00 AM</li>
+              <li>Fri: 5:30 PM - 6:30 PM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 7 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/sukhasana.jpg" alt="Yoga Meditation">
+          <h4>Yoga & Meditation</h4>
+          <p>Improve flexibility and reduce stress with our expert yoga instructors.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Tue, Thu: 7:00 AM - 8:00 AM</li>
+              <li>Sat: 9:30 AM - 10:30 AM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
+      <!-- Class 8 -->
+      <div class="col-md-4">
+        <div class="class-card">
+          <img src="image/HIIT_Workouts_2 (1).jpg" alt="HIIT Class">
+          <h4>HIIT Training</h4>
+          <p>High-intensity interval training to maximize fat burning and endurance.</p>
+          <div class="schedule">
+            <strong>Schedule:</strong>
+            <ul>
+              <li>Mon, Wed, Fri: 6:00 AM - 6:45 AM</li>
+              <li>Sat: 8:00 AM - 8:45 AM</li>
+            </ul>
+          </div>
+          <a href="register.html" class="btn btn-view">Join Class</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <script>
-    // Fetch all classes from backend
-    async function loadClasses() {
-      try {
-        const res = await fetch('http://localhost:5000/api/classes');
-        const data = await res.json();
-
-        const container = document.getElementById('classesContainer');
-        container.innerHTML = '';
-
-        data.classes.forEach(cls => {
-          const col = document.createElement('div');
-          col.className = 'col-md-4';
-          col.innerHTML = `
-            <div class="class-card">
-              <img src="${cls.image}" alt="${cls.name}">
-              <h4>${cls.name}</h4>
-              <p>${cls.description}</p>
-              <a href="register.html" class="btn btn-view mt-3">Join Class</a>
-            </div>
-          `;
-          container.appendChild(col);
-        });
-
-      } catch (err) {
-        console.error(err);
-        alert('Failed to load classes');
-      }
-    }
-
-    loadClasses();
-  </script>
-
 </body>
 </html>
-
